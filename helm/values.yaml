@@ -1,0 +1,28 @@
+# notification-service values
+# Inherits from base-chart
+
+base-chart:
+  replicaCount: 2
+  
+  image:
+    repository: your-registry/notification-service
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  
+  service:
+    type: ClusterIP
+    port: 8004
+  
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+    requests:
+      cpu: 200m
+      memory: 256Mi
+  
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 70
